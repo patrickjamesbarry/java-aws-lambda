@@ -9,6 +9,7 @@ import com.amazonaws.services.lambda.runtime.ClientContext;
 import com.amazonaws.services.lambda.runtime.CognitoIdentity;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
+import com.amazonaws.services.lambda.runtime.logging.LogLevel;
 import io.opentracing.mock.MockSpan;
 import io.opentracing.mock.MockTracer;
 import java.io.ByteArrayInputStream;
@@ -151,6 +152,17 @@ public class TracingRequestStreamHandlerTest {
         return new LambdaLogger() {
           @Override
           public void log(String string) {}
+
+          @Override public void log(byte[] bytes) {
+          }
+
+          @Override public void log(String message, LogLevel logLevel) {
+            LambdaLogger.super.log(message, logLevel);
+          }
+
+          @Override public void log(byte[] message, LogLevel logLevel) {
+            LambdaLogger.super.log(message, logLevel);
+          }
         };
       }
     };

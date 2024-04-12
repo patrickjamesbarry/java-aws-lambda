@@ -35,12 +35,18 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.amazonaws:aws-lambda-java-core:1.1.0'
+    //implementation 'com.amazonaws:aws-lambda-java-core:1.1.0'
     // 2.2.7 is earliest version that has all needed event sources
-    implementation 'com.amazonaws:aws-lambda-java-events:2.2.7'
-    implementation 'com.amazonaws:aws-java-sdk-s3:1.12.13'
-    implementation 'com.amazonaws:aws-java-sdk-kinesis:1.11.163'
-    implementation 'com.amazonaws:aws-java-sdk-dynamodb:1.11.163'
+//    implementation 'com.amazonaws:aws-lambda-java-events:2.2.7'
+//    implementation 'com.amazonaws:aws-java-sdk-s3:1.12.13'
+//    implementation 'com.amazonaws:aws-java-sdk-kinesis:1.11.163'
+//    implementation 'com.amazonaws:aws-java-sdk-dynamodb:1.11.163'
+    //  <groupId>com.amazonaws</groupId>
+    //    <artifactId>aws-lambda-java-events</artifactId>
+    //    <version>3.11.4</version>
+    implementation('com.amazonaws:aws-lambda-java-core:1.2.3')
+    implementation('com.amazonaws:aws-lambda-java-events:3.11.4')
+    implementation('software.amazon.awssdk:lambda:2.25.27')
     implementation('io.opentracing:opentracing-api:0.33.0')
     implementation('io.opentracing:opentracing-util:0.33.0')
     implementation('io.opentracing:opentracing-noop:0.33.0')

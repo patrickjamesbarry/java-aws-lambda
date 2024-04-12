@@ -22,7 +22,9 @@ import com.amazonaws.services.lambda.runtime.events.KinesisFirehoseEvent;
 import com.amazonaws.services.lambda.runtime.events.S3Event;
 import com.amazonaws.services.lambda.runtime.events.SNSEvent;
 import com.amazonaws.services.lambda.runtime.events.SQSEvent;
-import com.amazonaws.services.s3.event.S3EventNotification;
+
+import com.amazonaws.services.lambda.runtime.events.models.s3.S3EventNotification;
+import com.amazonaws.services.lambda.runtime.logging.LogLevel;
 import io.opentracing.mock.MockSpan;
 import io.opentracing.mock.MockTracer;
 import java.util.ArrayList;
@@ -580,6 +582,18 @@ public class TracingRequestHandlerTest {
         return new LambdaLogger() {
           @Override
           public void log(String string) {}
+
+          @Override public void log(byte[] bytes) {
+
+          }
+
+          @Override public void log(String message, LogLevel logLevel) {
+            LambdaLogger.super.log(message, logLevel);
+          }
+
+          @Override public void log(byte[] message, LogLevel logLevel) {
+            LambdaLogger.super.log(message, logLevel);
+          }
         };
       }
     };

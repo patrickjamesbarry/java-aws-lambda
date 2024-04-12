@@ -13,7 +13,8 @@ import com.amazonaws.services.lambda.runtime.events.KinesisEvent;
 import com.amazonaws.services.lambda.runtime.events.KinesisFirehoseEvent;
 import com.amazonaws.services.lambda.runtime.events.SNSEvent;
 import com.amazonaws.services.lambda.runtime.events.SQSEvent;
-import com.amazonaws.services.s3.event.S3EventNotification;
+import com.amazonaws.services.lambda.runtime.events.models.s3.S3EventNotification;
+
 import java.util.List;
 import java.util.Map;
 

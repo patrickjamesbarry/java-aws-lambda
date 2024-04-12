@@ -5,6 +5,7 @@
 
 package com.newrelic.opentracing.aws;
 
+
 import com.amazonaws.services.lambda.runtime.Context;
 import io.opentracing.Span;
 import io.opentracing.SpanContext;

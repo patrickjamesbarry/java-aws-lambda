@@ -5,12 +5,17 @@
 
 package com.newrelic.opentracing.aws;
 
-import com.amazonaws.Request;
+
 import io.opentracing.SpanContext;
 import io.opentracing.Tracer;
 import io.opentracing.propagation.Format;
 import io.opentracing.propagation.TextMapAdapter;
+import software.amazon.awssdk.http.SdkHttpRequest;
+
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 final class HeadersParser {
 
@@ -25,13 +30,22 @@ final class HeadersParser {
           final Map<String, String> headerStr = (Map<String, String>) headers;
           return tracer.extract(Format.Builtin.HTTP_HEADERS, new TextMapAdapter(headerStr));
         }
-      } else if (input instanceof com.amazonaws.Request) {
-        final Request request = (Request) input;
-        final Map<String, String> headers = request.getHeaders();
+      } else if (input instanceof SdkHttpRequest) {
+        final SdkHttpRequest request = (SdkHttpRequest) input;
+        Map<String, String> headers = toSimpleMap(request.headers());
+
         return tracer.extract(Format.Builtin.HTTP_HEADERS, new TextMapAdapter(headers));
       }
     } catch (IllegalArgumentException exception) {
     }
     return null;
+  }
+
+  private static Map<String, String> toSimpleMap(Map<String, List<String>> mulitValuedMap){
+    Map<String,String> simpleMap = new HashMap<>();
+    for(Map.Entry<String, List<String>> entry : mulitValuedMap.entrySet()){
+      simpleMap.put(entry.getKey(), String.join(", ", entry.getValue()));
+    }
+    return simpleMap;
   }
 }

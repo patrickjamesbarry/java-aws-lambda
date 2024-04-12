@@ -1,5 +1,6 @@
 package com.newrelic.opentracing.aws;
 
+
 import com.amazonaws.services.lambda.runtime.Context;
 import io.opentracing.Scope;
 import io.opentracing.Span;
@@ -32,7 +33,7 @@ public class LambdaTracing<Input, Output> {
    * @return The invocation response (the return value of the realHandler callback)
    */
   public static <Input, Output> Output instrument(
-      Input input, Context context, BiFunction<Input, Context, Output> realHandler) {
+          Input input, Context context, BiFunction<Input, Context, Output> realHandler) {
     return new LambdaTracing<Input, Output>().instrumentRequest(input, context, realHandler);
   }
 
